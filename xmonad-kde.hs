@@ -27,7 +27,7 @@ main = do
     , startupHook = do
         startupHook kdeConfig
         startProgs initProgs
-    -- WIP: not ready yet , manageHook = manageHook kdeConfig <+> customManageHook
+    , manageHook = manageHook kdeConfig <+> customKdeManageHook
     }
     `additionalKeysP`
     [ ("M-x b", safeSpawn "firefox" [])
@@ -36,14 +36,8 @@ main = do
     ]
 
 
-customManageHook = composeAll . concat $
-    [ [ className   =? c --> doFloat           | c <- myFloats]
-    , [ title       =? t --> doFloat           | t <- myOtherFloats]
-    , [ className   =? c --> doF (W.shift "1") | c <- webApps]
-    , [ className   =? c --> doF (W.shift "9") | c <- commApps]
-    ]
-  where myFloats      = ["MPlayer", "Gimp"]
-        myOtherFloats = ["alsamixer"]
-        webApps       = ["Firefox-bin", "Opera"] -- open on desktop 2
-        commApps       = ["KMail", "Slack - Cliqz"]  -- open on desktop 9
-
+customKdeManageHook = composeAll . concat $
+  [
+    [className =? c --> doFloat | c <- kdeFloats]
+  ]
+  where kdeFloats = ["krunner", "plasma-desktop", "Plasma-desktop", "kmix", "plasmashell"]
