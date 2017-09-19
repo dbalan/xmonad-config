@@ -7,6 +7,7 @@ import XMonad.Config.Kde
 import qualified XMonad.StackSet as W -- to shift and float windows
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
+import XMonad.Hooks.EwmhDesktops
 
 -- rewrite the start progs
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
@@ -28,11 +29,13 @@ main = do
         startupHook kdeConfig
         startProgs initProgs
     , manageHook = manageHook kdeConfig <+> customKdeManageHook
+    , handleEventHook = handleEventHook kdeConfig <+> fullscreenEventHook
     }
     `additionalKeysP`
     [ ("M-x b", safeSpawn "firefox" [])
     , ("M-x e", safeSpawn "emacsclient" ["-c"])
-    , ("M-p", safeSpawn "krunner" [])
+    -- going to let KDE do this.
+    , ("M-p", safeSpawn "dmenu_run" [])
     ]
 
 
