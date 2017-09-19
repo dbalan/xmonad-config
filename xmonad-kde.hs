@@ -8,6 +8,8 @@ import qualified XMonad.StackSet as W -- to shift and float windows
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+
 
 -- rewrite the start progs
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
@@ -28,7 +30,7 @@ main = do
     , startupHook = do
         startupHook kdeConfig
         startProgs initProgs
-    , manageHook = manageHook kdeConfig <+> customKdeManageHook
+    , manageHook = manageHook kdeConfig <+> customKdeManageHook <+> manageDocks
     , handleEventHook = handleEventHook kdeConfig <+> fullscreenEventHook
     }
     `additionalKeysP`
