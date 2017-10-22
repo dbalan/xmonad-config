@@ -22,7 +22,7 @@ initProgs = [ ("setxkbmap", ["-option", "ctrl:nocaps"])
 
 main = do
   xmonad $ kdeConfig
-    { terminal    = "gnome-terminal"
+    { terminal    = "/home/dj/localbuild/bin/st"
     , modMask     = mod4Mask
     , focusFollowsMouse = False
     , borderWidth = 3
