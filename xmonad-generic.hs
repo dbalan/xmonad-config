@@ -10,8 +10,7 @@ main = do
     { terminal    = "sakura"
     , modMask     = mod4Mask
     , focusFollowsMouse = False
-    , borderWidth = 3
-    , focusedBorderColor = "#e57a10"
+    , borderWidth = 1
     }
     `additionalKeysP`
     [ ("M-x b", safeSpawn "chrome" [])
