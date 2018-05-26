@@ -1,1 +1,1 @@
-xmonad-kde.hs
+xmonad-generic.hs
