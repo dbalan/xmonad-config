@@ -5,6 +5,7 @@ import XMonad.Actions.WindowBringer
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Tabbed (simpleTabbed)
+import XMonad.Config.Desktop
 
 -- rewrite the start progs
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
@@ -21,15 +22,19 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| simpleTabbed ) 
     delta = 3/100
     ratio = 1/2
 
+statusBar = "i3status -c /home/dhananjay/.xmonad/i3statusrc | dzen2 -dock -x '0' -y '-1'"
 main = do
-  xmonad $ defaultConfig
+  sp <- spawnPipe statusBar
+  xmonad $ desktopConfig
     { terminal    = "sakura"
     , modMask     = mod4Mask
     , focusFollowsMouse = True
     , borderWidth = 1
     , layoutHook = smartBorders $ customLayout
+    , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
+    , manageHook = manageDocks <+> manageHook desktopConfig
     , startupHook = do
-        startupHook defaultConfig
+        startupHook desktopConfig
         startProgs initProgs
     }
     `additionalKeysP`
