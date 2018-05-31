@@ -46,6 +46,8 @@ main = do
     , ("M-S-g", gotoMenu)
     , ("M-S-k", bringMenu)
 
+    , ("C-M1-l", spawn "xscreensaver-command -lock")
+
     -- multimedia keys
     -- , ("<XF86AudioMute>", safeSpawn "") -- already handled
     , ("<XF86AudioRaiseVolume>", spawn "mixer vol +4")
