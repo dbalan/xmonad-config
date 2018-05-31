@@ -22,7 +22,8 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| simpleTabbed ) 
     delta = 3/100
     ratio = 1/2
 
-statusBar = "i3status -c /home/dhananjay/.xmonad/i3statusrc | dzen2 -dock -x '0' -y '-1'"
+statusBar = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
+  "dzen2 -dock -x '0' -y '-1' -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-iso8859'"
 main = do
   sp <- spawnPipe statusBar
   xmonad $ desktopConfig
