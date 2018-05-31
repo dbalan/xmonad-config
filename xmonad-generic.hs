@@ -8,7 +8,7 @@ import XMonad.Layout.NoBorders (smartBorders)
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
 
 initProgs = [ ("emacs", ["--daemon"])
---            , ("xscreensaver", [])
+            , ("xscreensaver", [])
             ]
 main = do
   xmonad $ defaultConfig
