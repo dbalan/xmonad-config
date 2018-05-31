@@ -28,5 +28,9 @@ main = do
     -- window bringer actions
     , ("M-S-g", gotoMenu)
     , ("M-S-k", bringMenu)
-    ]
 
+    -- multimedia keys
+    -- , ("<XF86AudioMute>", safeSpawn "") -- already handled
+    , ("<XF86AudioRaiseVolume>", spawn "mixer vol +4")
+    , ("<XF86AudioLowerVolume>", spawn "mixer vol -4")
+    ]
