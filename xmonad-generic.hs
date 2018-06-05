@@ -12,6 +12,7 @@ startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
 
 initProgs = [ ("emacs", ["--daemon"])
             , ("xscreensaver", [])
+            , ("feh", ["--bg-scale", "/home/dhananjay/Desktop/bg.jpg"])
             ]
 
 
