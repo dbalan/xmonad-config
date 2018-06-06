@@ -28,7 +28,7 @@ statusBar = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
 main = do
   sp <- spawnPipe statusBar
   xmonad $ desktopConfig
-    { terminal    = "sakura"
+    { terminal    = "gnome-terminal"
     , modMask     = mod4Mask
     , focusFollowsMouse = True
     , borderWidth = 1
