@@ -4,7 +4,7 @@ import XMonad.Util.EZConfig
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Tabbed (simpleTabbed)
+import XMonad.Layout.MouseResizableTile (mouseResizableTile)
 import XMonad.Config.Desktop
 
 -- rewrite the start progs
@@ -16,7 +16,7 @@ initProgs = [ ("emacs", ["--daemon"])
             ]
 
 
-customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| simpleTabbed ) ||| Full
+customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| mouseResizableTile ) ||| Full
   where
     tiled = Tall nmaster delta ratio
     nmaster = 1
