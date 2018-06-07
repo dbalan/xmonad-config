@@ -23,10 +23,11 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| simpleTabbed ) 
     delta = 3/100
     ratio = 1/2
 
-statusBar = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
-  "dzen2 -dock -x '0' -y '-1' -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-iso8859'"
+sb = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
+  "dzen2 -dock -x '0' -y '-1' -fn 'xft:monaco:size=10'"
+
 main = do
-  sp <- spawnPipe statusBar
+  sp <- spawnPipe sb
   xmonad $ desktopConfig
     { terminal    = "gnome-terminal"
     , modMask     = mod4Mask

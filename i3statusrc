@@ -7,10 +7,10 @@ general {
 # order += "disk /"
 # order += "run_watch DHCP"
 order += "wireless wlan0"
-order += "ethernet eth0"
-order += "battery 0"
+# order += "ethernet em0"
 #order += "cpu_temperature 0"
-order += "load"
+order += "cpu_usage all"
+order += "battery 0"
 order += "tztime local"
 
 wireless wlan0 {
@@ -25,14 +25,13 @@ ethernet eth0 {
 }
 
 battery 0 {
-        format = "%status %percentage %remaining %emptytime"
+        format = "%status %percentage %remaining h"
         format_down = "No battery"
-        status_chr = "⚡ CHR"
-        status_bat = "🔋 BAT"
-        status_unk = "? UNK"
-        status_full = "☻ FULL"
-        path = "/sys/class/power_supply/BAT%d/uevent"
-        low_threshold = 10
+        status_chr = "CHR"
+        status_bat = "BAT"
+        status_unk = "UNK"
+        status_full = "FULL"
+        low_threshold = 20
 }
 
 run_watch DHCP {
@@ -41,12 +40,10 @@ run_watch DHCP {
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
+        align = "right"
 }
 
-load {
-        format = "%5min"
-}
-
-disk "/" {
-        format = "%free"
+cpu_usage {
+          format = "CPU: %usage"
+          degraded_threshold = 25
 }
