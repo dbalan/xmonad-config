@@ -4,9 +4,9 @@ import XMonad.Util.EZConfig
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog
 import XMonad.Layout.MouseResizableTile (mouseResizableTile)
 import XMonad.Config.Desktop
-
 -- rewrite the start progs
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
 
@@ -23,8 +23,11 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| mouseResizableT
     delta = 3/100
     ratio = 1/2
 
-sb = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
-  "dzen2 -dock -x '0' -y '-1' -fn 'xft:monaco:size=10'"
+font = "-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*"
+--sb = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
+--  "dzen2 -dock -x '0' -y '-1' -fn 'xft:monaco:size=10'"
+sb = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
+  "dzen2 -dock -x b -expand left -fn '" ++ font ++ "'"
 
 main = do
   sp <- spawnPipe sb
@@ -34,6 +37,7 @@ main = do
     , focusFollowsMouse = True
     , borderWidth = 1
     , layoutHook = smartBorders $ customLayout
+    -- , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn sp }
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
     , manageHook = manageDocks <+> manageHook desktopConfig
     , startupHook = do
