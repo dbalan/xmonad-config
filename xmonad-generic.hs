@@ -24,8 +24,6 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| mouseResizableT
     ratio = 1/2
 
 font = "'-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*'"
---sb = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
---  "dzen2 -dock -x '0' -y '-1' -fn 'xft:monaco:size=10'"
 stdzen = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
   "dzen2 -dock -x b -expand left -fn " ++ font
 wsdze = "dzen2 -dock -expand right -fn " ++ font
