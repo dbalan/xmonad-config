@@ -23,21 +23,23 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| mouseResizableT
     delta = 3/100
     ratio = 1/2
 
-font = "-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*"
+font = "'-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*'"
 --sb = "i3status -c /home/dhananjay/.xmonad/i3statusrc | " ++
 --  "dzen2 -dock -x '0' -y '-1' -fn 'xft:monaco:size=10'"
-sb = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
-  "dzen2 -dock -x b -expand left -fn '" ++ font ++ "'"
+stdzen = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
+  "dzen2 -dock -x b -expand left -fn " ++ font
+wsdze = "dzen2 -dock -expand right -fn " ++ font
 
 main = do
-  sp <- spawnPipe sb
+  _ <- spawn stdzen
+  wsdzP <- spawnPipe wsdze
   xmonad $ desktopConfig
     { terminal    = "gnome-terminal"
     , modMask     = mod4Mask
     , focusFollowsMouse = True
     , borderWidth = 1
     , layoutHook = smartBorders $ customLayout
-    -- , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn sp }
+    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn wsdzP }
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
     , manageHook = manageDocks <+> manageHook desktopConfig
     , startupHook = do
