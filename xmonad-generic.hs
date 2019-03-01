@@ -12,7 +12,7 @@ startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
 
 initProgs = [ ("emacs", ["--daemon"])
             , ("xscreensaver", [])
-            , ("feh", ["--bg-scale", "/home/dhananjay/Desktop/bg.jpg"])
+            , ("feh", ["--bg-scale", "/home/dhananjay/Desktop/munich.jpg"])
             ]
 
 
@@ -41,7 +41,7 @@ main = do
         startProgs initProgs
     }
     `additionalKeysP`
-    [ ("M-x b", safeSpawn "chrome" [])
+    [ ("M-x b", safeSpawn "cliqz" [])
     , ("M-x e", safeSpawn "emacsclient" ["-c"])
     , ("M-[", safeSpawn "dmenu_run" [])
     -- window bringer actions
@@ -52,6 +52,6 @@ main = do
 
     -- multimedia keys
     -- , ("<XF86AudioMute>", safeSpawn "") -- already handled
-    , ("<XF86AudioRaiseVolume>", spawn "mixer vol +4")
-    , ("<XF86AudioLowerVolume>", spawn "mixer vol -4")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
     ]
