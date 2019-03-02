@@ -23,21 +23,37 @@ customLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full ||| mouseResizableT
     delta = 3/100
     ratio = 1/2
 
+pplayout :: String -> String
+pplayout n
+  | n == "Tall" = "[]="
+  | n == "Mirror Tall" = "|=|"
+  | n == "Full" = "[f]"
+  | n == "MouseResizableTile" = "<|>"
+  | otherwise = n
+
+pptitle :: String -> String
+pptitle "" = "<no-title>"
+pptitle t = if (length t) > 20 then
+              (take 20 t)
+            else t
+
+customPP = defaultPP { ppLayout = pplayout, ppTitle = pptitle }
+
 font = "'-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*'"
 stdzen = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
   "dzen2 -dock -x b -expand left -fn " ++ font
-wsdze = "dzen2 -dock -expand right -fn " ++ font
+wsdze = "dzen2 -dock -ta l -fn " ++ font
 
 main = do
-  _ <- spawn stdzen
   wsdzP <- spawnPipe wsdze
+  _ <- spawn stdzen
   xmonad $ desktopConfig
     { terminal    = "gnome-terminal"
     , modMask     = mod4Mask
     , focusFollowsMouse = True
     , borderWidth = 1
     , layoutHook = smartBorders $ customLayout
-    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn wsdzP }
+    , logHook = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn wsdzP }
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
     , manageHook = manageDocks <+> manageHook desktopConfig
     , startupHook = do
