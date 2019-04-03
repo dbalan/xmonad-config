@@ -10,7 +10,7 @@ import XMonad.Config.Desktop
 -- rewrite the start progs
 startProgs prgs = mapM_ (\(cmd,args) -> safeSpawn cmd args) prgs
 
-initProgs = [ ("feh", ["--bg-scale", "/home/dhananjay/Desktop/munich.jpg"])
+initProgs = [ ("feh", ["--bg-scale", "/home/dj/Pictures/desk.jpg"])
             ]
 
 
@@ -38,7 +38,7 @@ pptitle t = if (length t) > 20 then
 customPP = defaultPP { ppLayout = pplayout, ppTitle = pptitle }
 
 font = "'-*-monaco-*-r-normal-*-*-100-*-*-*-*-iso8859-*'"
-stdzen = "/home/dhananjay/localbuild/slstatus/slstatus -s | " ++
+stdzen = "slstatus -s | " ++
   "dzen2 -dock -x b -expand left -fn " ++ font
 wsdze = "dzen2 -dock -ta l -fn " ++ font
 
@@ -46,7 +46,7 @@ main = do
   wsdzP <- spawnPipe wsdze
   _ <- spawn stdzen
   xmonad $ desktopConfig
-    { terminal    = "gnome-terminal"
+    { terminal    = "alacritty"
     , modMask     = mod4Mask
     , focusFollowsMouse = True
     , borderWidth = 1
@@ -66,7 +66,7 @@ main = do
     , ("M-S-g", gotoMenu)
     , ("M-S-k", bringMenu)
 
-    , ("C-M1-l", spawn "xscreensaver-command -lock")
+    , ("C-M1-l", spawn "slock")
 
     -- multimedia keys
     -- , ("<XF86AudioMute>", safeSpawn "") -- already handled
